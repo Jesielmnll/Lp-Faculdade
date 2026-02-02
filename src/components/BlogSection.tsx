@@ -34,7 +34,7 @@ const BlogSection = () => {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
 
   return (
-    <section id="blog" className="py-24 bg-secondary/30 relative">
+    <section id="blog" className="py-32 bg-secondary/30 relative">
       <div
         ref={ref}
         className={cn(
@@ -57,12 +57,12 @@ const BlogSection = () => {
           </Button>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post, index) => (
             <article
               key={post.id}
               className={cn(
-                "group rounded-2xl overflow-hidden bg-gradient-card border border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-neon/10 cursor-pointer",
+                "group rounded-2xl overflow-hidden bg-gradient-card border border-border/50 hover:border-primary/30 transition-all duration-500 cursor-pointer card-hover-elevate",
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               )}
               style={{ transitionDelay: `${index * 100}ms` }}

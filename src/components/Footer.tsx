@@ -30,13 +30,13 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="bg-background border-t border-border/50 pt-16 pb-8">
+    <footer className="bg-background border-t border-border/50 pt-20 pb-8">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
           {/* Brand */}
           <div className="lg:col-span-2">
             <a href="#home" className="flex items-center gap-2 mb-6">
-              <div className="w-12 h-12 rounded-lg bg-primary flex items-center justify-center">
+              <div className="w-12 h-12 rounded-lg bg-primary flex items-center justify-center glow-neon-soft">
                 <span className="text-primary-foreground font-display font-bold text-2xl">i9</span>
               </div>
               <span className="font-display font-bold text-2xl text-foreground">
@@ -54,7 +54,7 @@ const Footer = () => {
                 <a
                   key={social.label}
                   href={social.href}
-                  className="w-10 h-10 rounded-lg bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
+                  className="w-10 h-10 rounded-lg bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary hover:glow-neon-soft transition-all duration-300"
                   aria-label={social.label}
                 >
                   <social.icon className="w-5 h-5" />
@@ -71,7 +71,7 @@ const Footer = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="text-muted-foreground hover:text-primary transition-colors link-underline"
                   >
                     {link.label}
                   </a>
@@ -87,7 +87,7 @@ const Footer = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="text-muted-foreground hover:text-primary transition-colors link-underline"
                   >
                     {link.label}
                   </a>
@@ -103,7 +103,7 @@ const Footer = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="text-muted-foreground hover:text-primary transition-colors link-underline"
                   >
                     {link.label}
                   </a>
@@ -114,7 +114,7 @@ const Footer = () => {
         </div>
 
         {/* Contact & Credentials */}
-        <div className="border-t border-border/50 pt-8 mb-8">
+        <div className="border-t border-border/50 pt-10 mb-10">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="flex items-start gap-3">
               <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center flex-shrink-0">
@@ -122,7 +122,7 @@ const Footer = () => {
               </div>
               <div>
                 <h5 className="font-semibold text-foreground mb-1">E-mail</h5>
-                <a href="mailto:contato@i9educacao.edu.br" className="text-muted-foreground hover:text-primary transition-colors">
+                <a href="mailto:contato@i9educacao.edu.br" className="text-muted-foreground hover:text-primary transition-colors link-underline">
                   contato@i9educacao.edu.br
                 </a>
               </div>
@@ -134,7 +134,7 @@ const Footer = () => {
               </div>
               <div>
                 <h5 className="font-semibold text-foreground mb-1">Telefone</h5>
-                <a href="tel:+5511999999999" className="text-muted-foreground hover:text-primary transition-colors">
+                <a href="tel:+5511999999999" className="text-muted-foreground hover:text-primary transition-colors link-underline">
                   (11) 99999-9999
                 </a>
               </div>
@@ -155,10 +155,10 @@ const Footer = () => {
         </div>
 
         {/* Credentials */}
-        <div className="border-t border-border/50 pt-8 mb-8">
+        <div className="border-t border-border/50 pt-10 mb-10">
           <div className="flex flex-wrap items-center justify-center gap-8">
             {/* e-MEC Badge */}
-            <div className="flex items-center gap-4 px-6 py-4 rounded-xl bg-secondary/50 border border-border/50">
+            <div className="flex items-center gap-4 px-6 py-4 rounded-xl bg-secondary/50 border border-border/50 hover:border-primary/30 transition-all duration-300">
               <div className="w-16 h-16 bg-foreground/10 rounded-lg flex items-center justify-center">
                 <span className="font-display font-bold text-foreground text-xs text-center">e-MEC<br/>✓</span>
               </div>
@@ -169,7 +169,7 @@ const Footer = () => {
             </div>
 
             {/* Reclame Aqui Badge */}
-            <div className="flex items-center gap-4 px-6 py-4 rounded-xl bg-secondary/50 border border-border/50">
+            <div className="flex items-center gap-4 px-6 py-4 rounded-xl bg-secondary/50 border border-border/50 hover:border-primary/30 transition-all duration-300">
               <div className="w-16 h-16 bg-primary/20 rounded-lg flex items-center justify-center">
                 <span className="font-display font-bold text-primary text-2xl">RA</span>
               </div>
@@ -187,11 +187,11 @@ const Footer = () => {
             © {new Date().getFullYear()} Faculdade i9 Educação. Todos os direitos reservados.
           </p>
           <div className="flex items-center justify-center gap-4 mt-4 text-sm">
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="#" className="text-muted-foreground hover:text-primary transition-colors link-underline">
               Política de Privacidade
             </a>
             <span className="text-muted-foreground">•</span>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="#" className="text-muted-foreground hover:text-primary transition-colors link-underline">
               Termos de Uso
             </a>
           </div>
