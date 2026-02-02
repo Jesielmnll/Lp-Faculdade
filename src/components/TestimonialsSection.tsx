@@ -68,7 +68,7 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section className="py-24 bg-background relative">
+    <section className="py-32 bg-background relative">
       <div
         ref={ref}
         className={cn(
@@ -97,14 +97,14 @@ const TestimonialsSection = () => {
                   key={testimonial.id}
                   className="w-full flex-shrink-0 px-4"
                 >
-                  <div className="bg-foreground/5 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-border/50 relative">
+                  <div className="bg-foreground/5 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-border/50 relative card-hover-elevate">
                     <Quote className="absolute top-6 right-6 w-12 h-12 text-primary/20" />
                     
                     <div className="flex items-center gap-4 mb-6">
                       <img
                         src={testimonial.image}
                         alt={testimonial.name}
-                        className="w-16 h-16 rounded-full object-cover border-2 border-primary"
+                        className="w-16 h-16 rounded-full object-cover border-2 border-primary glow-neon-soft"
                       />
                       <div>
                         <h4 className="font-display text-lg font-bold text-foreground">
@@ -133,14 +133,14 @@ const TestimonialsSection = () => {
           {/* Navigation buttons */}
           <button
             onClick={goToPrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 w-10 h-10 rounded-full bg-secondary border border-border flex items-center justify-center text-foreground hover:border-primary hover:text-primary transition-colors"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 w-10 h-10 rounded-full bg-secondary border border-border flex items-center justify-center text-foreground hover:border-primary hover:text-primary hover:glow-neon-soft transition-all duration-300"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={goToNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 w-10 h-10 rounded-full bg-secondary border border-border flex items-center justify-center text-foreground hover:border-primary hover:text-primary transition-colors"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 w-10 h-10 rounded-full bg-secondary border border-border flex items-center justify-center text-foreground hover:border-primary hover:text-primary hover:glow-neon-soft transition-all duration-300"
             aria-label="Next testimonial"
           >
             <ChevronRight className="w-5 h-5" />
