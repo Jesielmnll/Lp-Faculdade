@@ -45,7 +45,7 @@ const fallbackImages = [
 ];
 
 function getFeaturedImage(post: WPPost, index: number): string {
-  return post._embedded?.['wp:featuredmedia']?.[0]?.source_url || fallbackImages[index % fallbackImages.length];
+  return post.featured_image_url || post._embedded?.['wp:featuredmedia']?.[0]?.source_url || fallbackImages[index % fallbackImages.length];
 }
 
 function stripHtml(html: string): string {

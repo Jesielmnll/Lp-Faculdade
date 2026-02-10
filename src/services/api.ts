@@ -10,6 +10,7 @@ export interface WPPost {
   content: { rendered: string };
   slug: string;
   featured_media: number;
+  featured_image_url?: string;
   _embedded?: {
     'wp:featuredmedia'?: Array<{
       source_url: string;

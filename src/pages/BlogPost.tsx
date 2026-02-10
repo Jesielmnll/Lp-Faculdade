@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import type { WPPost } from '@/services/api';
 
 function getFeaturedImage(post: WPPost): string {
-  return post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '';
+  return post.featured_image_url || post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '';
 }
 
 function getAuthorName(post: WPPost): string {
@@ -85,11 +85,15 @@ const BlogPost = () => {
 
               <div
                 className="prose prose-invert prose-lg max-w-none
-                  prose-headings:font-display prose-headings:text-foreground
+                  prose-headings:font-display prose-headings:text-foreground prose-headings:leading-tight
                   prose-p:text-muted-foreground prose-p:leading-relaxed
                   prose-a:text-primary prose-a:no-underline hover:prose-a:underline
                   prose-strong:text-foreground
-                  prose-img:rounded-xl"
+                  prose-img:rounded-xl
+                  prose-blockquote:border-primary prose-blockquote:text-muted-foreground
+                  prose-li:text-muted-foreground
+                  prose-code:text-primary prose-code:bg-secondary prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+                  prose-hr:border-border"
                 dangerouslySetInnerHTML={{ __html: post.content.rendered }}
               />
             </article>

@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 import type { WPPost } from '@/services/api';
 
 function getFeaturedImage(post: WPPost): string {
-  return post._embedded?.['wp:featuredmedia']?.[0]?.source_url || 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=250&fit=crop';
+  return post.featured_image_url || post._embedded?.['wp:featuredmedia']?.[0]?.source_url || 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=250&fit=crop';
 }
 
 function stripHtml(html: string): string {
