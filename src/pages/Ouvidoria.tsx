@@ -50,7 +50,7 @@ const Ouvidoria = () => {
     // reCAPTCHA v2/v3 token
     let recaptchaToken = '';
     try {
-      if (window.grecaptcha && RECAPTCHA_SITE_KEY !== 'YOUR_RECAPTCHA_SITE_KEY') {
+      if (window.grecaptcha && RECAPTCHA_SITE_KEY) {
         recaptchaToken = await new Promise<string>((resolve, reject) => {
           window.grecaptcha.ready(() => {
             window.grecaptcha

@@ -1,4 +1,4 @@
-import { API_BASE_URL, WP_API, I9_API } from '@/config/api';
+import { WP_API, I9_API, WP_API_KEY } from '@/config/api';
 
 // ── Types ──────────────────────────────────────────────
 
@@ -61,12 +61,20 @@ export interface ApiResponse<T> {
 
 // ── Fetch Helper ───────────────────────────────────────
 
+function getHeaders(extra?: HeadersInit): HeadersInit {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+  if (WP_API_KEY) {
+    headers['X-I9-API-KEY'] = WP_API_KEY;
+  }
+  return { ...headers, ...(extra as Record<string, string>) };
+}
+
 async function apiFetch<T>(url: string, options?: RequestInit): Promise<T> {
   const res = await fetch(url, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
     ...options,
+    headers: getHeaders(options?.headers as HeadersInit),
   });
 
   if (!res.ok) {
@@ -81,7 +89,7 @@ async function apiFetch<T>(url: string, options?: RequestInit): Promise<T> {
 export async function fetchPosts(page = 1, perPage = 9): Promise<{ posts: WPPost[]; total: number; totalPages: number }> {
   const url = `${WP_API}/posts?_embed&page=${page}&per_page=${perPage}`;
   const res = await fetch(url, {
-    headers: { 'Content-Type': 'application/json' },
+    headers: getHeaders(),
   });
 
   if (!res.ok) throw new Error(`API error ${res.status}`);
