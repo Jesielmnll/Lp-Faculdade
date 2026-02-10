@@ -15,7 +15,7 @@ const Estagio = () => {
   const { data: estagios, isLoading } = useEstagios();
 
   const filtered: EstagioItem[] = selectedUF
-    ? (estagios || []).filter((e) => e.estado_uf.toUpperCase() === selectedUF.toUpperCase())
+    ? (estagios || []).filter((e) => e.estado_uf?.toUpperCase() === selectedUF.toUpperCase())
     : [];
 
   return (
@@ -44,7 +44,7 @@ const Estagio = () => {
               <BrazilMap
                 selectedUF={selectedUF}
                 onSelectUF={(uf) => setSelectedUF(uf === selectedUF ? null : uf)}
-                availableUFs={(estagios || []).map((e) => e.estado_uf.toUpperCase())}
+                availableUFs={(estagios || []).filter((e) => e.estado_uf).map((e) => e.estado_uf.toUpperCase())}
               />
             </div>
 
