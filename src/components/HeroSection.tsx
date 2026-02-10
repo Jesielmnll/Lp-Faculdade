@@ -2,6 +2,7 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { cn } from '@/lib/utils';
+import heroBg from '@/assets/hero-bg.jpg';
 
 const HeroSection = () => {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
@@ -9,10 +10,15 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-geometric"
+      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
     >
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background pointer-events-none" />
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBg})` }}
+      />
+      {/* Dark gradient overlay for legibility */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/80 to-background pointer-events-none" />
 
       {/* Floating elements */}
       <div className="absolute top-1/4 left-10 w-2 h-2 bg-primary rounded-full animate-float opacity-60" />

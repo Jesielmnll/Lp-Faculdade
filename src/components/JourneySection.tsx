@@ -1,34 +1,45 @@
-import { ClipboardCheck, BookOpen, Award } from 'lucide-react';
+import { BookOpen, Award, BadgeCheck, Monitor, FileText, Layers } from 'lucide-react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { cn } from '@/lib/utils';
 
-const steps = [
+const benefits = [
   {
-    number: '01',
-    title: 'Inscrição Online',
-    description: 'Faça sua inscrição de forma rápida e prática pelo nosso portal. Em poucos minutos você estará matriculado.',
-    icon: ClipboardCheck,
+    title: 'Material Exclusivo',
+    description: '1 E-book por Unidade de Ensino, com conteúdo atualizado e desenvolvido por especialistas.',
+    icon: FileText,
   },
   {
-    number: '02',
-    title: 'Acesso à Plataforma',
-    description: 'Receba suas credenciais e tenha acesso imediato a todo o conteúdo, materiais e recursos exclusivos.',
-    icon: BookOpen,
+    title: 'Aulas Online',
+    description: '384 horas de conteúdo em vídeo + materiais complementares para estudo flexível.',
+    icon: Monitor,
   },
   {
-    number: '03',
-    title: 'Certificação Profissional',
-    description: 'Complete sua jornada e receba seu certificado reconhecido pelo MEC para impulsionar sua carreira.',
+    title: 'Certificado MEC',
+    description: 'Certificado reconhecido pelo MEC, 100% gratuito ao concluir sua formação.',
     icon: Award,
+  },
+  {
+    title: 'Microcertificações',
+    description: 'A cada Unidade de Ensino concluída, receba um microcertificado específico para seu currículo.',
+    icon: BadgeCheck,
+  },
+  {
+    title: 'Avaliação Digital',
+    description: 'Provas e avaliações 100% digitais, com feedback imediato e acompanhamento do progresso.',
+    icon: Layers,
+  },
+  {
+    title: 'Plataforma Responsiva',
+    description: 'Estude de qualquer dispositivo — desktop, tablet ou celular — com a mesma experiência.',
+    icon: BookOpen,
   },
 ];
 
-const JourneySection = () => {
+const DiferenciaisSection = () => {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
 
   return (
     <section className="py-32 bg-background relative overflow-hidden">
-      {/* Background decoration */}
       <div className="absolute inset-0 bg-geometric opacity-30" />
       
       <div
@@ -40,67 +51,44 @@ const JourneySection = () => {
       >
         <div className="text-center mb-20">
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Sua Jornada na <span className="text-gradient-neon">i9</span>
+            Diferenciais <span className="text-gradient-neon">i9</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Um caminho simples e direto para transformar sua carreira
+            Tudo o que você precisa para uma formação completa e reconhecida
           </p>
         </div>
 
-        <div className="relative max-w-6xl mx-auto">
-          {/* Connector line - desktop only */}
-          <div className="hidden lg:block absolute top-1/2 left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20 -translate-y-1/2 z-0" />
-          
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-            {steps.map((step, index) => (
-              <div
-                key={step.number}
-                className={cn(
-                  "relative group",
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                )}
-                style={{ transitionDelay: `${index * 200}ms`, transitionDuration: '600ms' }}
-              >
-                {/* Card */}
-                <div className="relative bg-gradient-card rounded-2xl p-8 border border-border/50 hover:border-primary/30 transition-all duration-500 card-hover-elevate z-10">
-                  {/* Background number */}
-                  <div className="absolute top-4 right-4 font-display text-8xl font-bold text-primary/5 select-none pointer-events-none group-hover:text-primary/10 transition-colors duration-500">
-                    {step.number}
-                  </div>
-                  
-                  {/* Icon */}
-                  <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6 group-hover:glow-neon-soft transition-all duration-300">
-                    <step.icon className="w-8 h-8 text-primary" />
-                  </div>
-                  
-                  {/* Step number badge */}
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-4">
-                    <span className="font-display text-sm font-bold text-primary">Passo {step.number}</span>
-                  </div>
-                  
-                  {/* Content */}
-                  <h3 className="font-display text-xl font-bold text-foreground mb-3">
-                    {step.title}
-                  </h3>
-                  
-                  <p className="text-muted-foreground leading-relaxed">
-                    {step.description}
-                  </p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+          {benefits.map((benefit, index) => (
+            <div
+              key={benefit.title}
+              className={cn(
+                "relative group",
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              )}
+              style={{ transitionDelay: `${index * 100}ms`, transitionDuration: '600ms' }}
+            >
+              <div className="relative bg-gradient-card rounded-2xl p-8 border border-border/50 hover:border-primary/30 transition-all duration-500 card-hover-elevate h-full">
+                {/* Icon */}
+                <div className="w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-all duration-300">
+                  <benefit.icon className="w-7 h-7 text-primary" />
                 </div>
-
-                {/* Mobile connector */}
-                {index < steps.length - 1 && (
-                  <div className="md:hidden flex justify-center my-4">
-                    <div className="w-0.5 h-8 bg-gradient-to-b from-primary/40 to-primary/10" />
-                  </div>
-                )}
+                
+                {/* Content */}
+                <h3 className="font-display text-xl font-bold text-foreground mb-3">
+                  {benefit.title}
+                </h3>
+                
+                <p className="text-muted-foreground leading-relaxed text-sm">
+                  {benefit.description}
+                </p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
 
-export default JourneySection;
+export default DiferenciaisSection;

@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { cn } from '@/lib/utils';
+import statsBg from '@/assets/stats-bg.jpg';
 
 interface StatItemProps {
   value: number;
@@ -25,10 +26,7 @@ const StatItem = ({ value, suffix, prefix = '', label, description, isVisible, d
       const animate = () => {
         const elapsed = Date.now() - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        
-        // Easing function (easeOutExpo)
         const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-        
         const currentValue = Math.floor(value * easeProgress);
         setDisplayValue(currentValue);
         
@@ -58,7 +56,7 @@ const StatItem = ({ value, suffix, prefix = '', label, description, isVisible, d
   return (
     <div
       className={cn(
-        "text-center p-8 lg:p-10 rounded-2xl bg-gradient-card border border-border/50 hover:border-primary/30 transition-all duration-500 card-hover-elevate group",
+        "text-center p-8 lg:p-10 rounded-2xl bg-background/40 backdrop-blur-sm border border-border/30 hover:border-primary/30 transition-all duration-500 card-hover-elevate group",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       )}
       style={{ transitionDelay: `${delay}ms` }}
@@ -76,20 +74,17 @@ const StatItem = ({ value, suffix, prefix = '', label, description, isVisible, d
   );
 };
 
-const stats = [
-  { value: 2500, suffix: 'K', prefix: '+', label: 'Horas de Conteúdo', description: 'Material didático completo', displayValue: '2.5K' },
-  { value: 2000000, suffix: 'M', prefix: '+', label: 'Aulas Ministradas', description: 'Experiência comprovada', displayValue: '2M' },
-  { value: 48000, suffix: 'K', prefix: '+', label: 'i9Lovers', description: 'Comunidade ativa', displayValue: '48K' },
-  { value: 100, suffix: '%', prefix: '', label: 'Satisfação', description: 'Avaliação dos alunos', displayValue: '100' },
-];
-
 const StatsSection = () => {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
 
   return (
-    <section className="py-32 bg-secondary/30 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-geometric opacity-50" />
+    <section className="py-32 relative overflow-hidden">
+      {/* Background image with overlay */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${statsBg})` }}
+      />
+      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
       
       <div
         ref={ref}
@@ -108,42 +103,10 @@ const StatsSection = () => {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-5xl mx-auto">
-          <StatItem
-            value={2500}
-            suffix=""
-            prefix="+"
-            label="Horas de Conteúdo"
-            description="Material didático completo"
-            isVisible={isVisible}
-            delay={0}
-          />
-          <StatItem
-            value={2}
-            suffix="M"
-            prefix="+"
-            label="Aulas Ministradas"
-            description="Experiência comprovada"
-            isVisible={isVisible}
-            delay={100}
-          />
-          <StatItem
-            value={48}
-            suffix="K"
-            prefix="+"
-            label="i9Lovers"
-            description="Comunidade ativa"
-            isVisible={isVisible}
-            delay={200}
-          />
-          <StatItem
-            value={100}
-            suffix="%"
-            prefix=""
-            label="Satisfação"
-            description="Avaliação dos alunos"
-            isVisible={isVisible}
-            delay={300}
-          />
+          <StatItem value={2500} suffix="" prefix="+" label="Horas de Conteúdo" description="Material didático completo" isVisible={isVisible} delay={0} />
+          <StatItem value={2} suffix="M" prefix="+" label="Aulas Ministradas" description="Experiência comprovada" isVisible={isVisible} delay={100} />
+          <StatItem value={48} suffix="K" prefix="+" label="i9Lovers" description="Comunidade ativa" isVisible={isVisible} delay={200} />
+          <StatItem value={100} suffix="%" prefix="" label="Satisfação" description="Avaliação dos alunos" isVisible={isVisible} delay={300} />
         </div>
       </div>
     </section>

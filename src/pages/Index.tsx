@@ -2,7 +2,7 @@ import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
 import MVVSection from '@/components/MVVSection';
-import JourneySection from '@/components/JourneySection';
+import DiferenciaisSection from '@/components/JourneySection';
 import CoursesSection from '@/components/CoursesSection';
 import StatsSection from '@/components/StatsSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
@@ -18,7 +18,7 @@ const Index = () => {
         <HeroSection />
         <AboutSection />
         <MVVSection />
-        <JourneySection />
+        <DiferenciaisSection />
         <CoursesSection />
         <StatsSection />
         <TestimonialsSection />
