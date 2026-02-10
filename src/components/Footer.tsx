@@ -33,15 +33,14 @@ const Footer = () => {
     <footer className="bg-background border-t border-border/50 pt-20 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
-          {/* Brand */}
+          {/* Brand - Logo image instead of text */}
           <div className="lg:col-span-2">
-            <a href="#home" className="flex items-center gap-2 mb-6">
-              <div className="w-12 h-12 rounded-lg bg-primary flex items-center justify-center glow-neon-soft">
-                <span className="text-primary-foreground font-display font-bold text-2xl">i9</span>
-              </div>
-              <span className="font-display font-bold text-2xl text-foreground">
-                Educação
-              </span>
+            <a href="#home" className="flex items-center mb-6">
+              <img
+                src="/placeholder.svg"
+                alt="i9 Educação"
+                className="!max-h-12 w-auto object-contain"
+              />
             </a>
             
             <p className="text-muted-foreground mb-6 max-w-sm">
@@ -54,7 +53,7 @@ const Footer = () => {
                 <a
                   key={social.label}
                   href={social.href}
-                  className="w-10 h-10 rounded-lg bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary hover:glow-neon-soft transition-all duration-300"
+                  className="w-10 h-10 rounded-lg bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all duration-300"
                   aria-label={social.label}
                 >
                   <social.icon className="w-5 h-5" />
@@ -69,10 +68,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.courses.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors link-underline"
-                  >
+                  <a href={link.href} className="text-muted-foreground hover:text-primary transition-colors link-underline">
                     {link.label}
                   </a>
                 </li>
@@ -85,10 +81,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors link-underline"
-                  >
+                  <a href={link.href} className="text-muted-foreground hover:text-primary transition-colors link-underline">
                     {link.label}
                   </a>
                 </li>
@@ -101,10 +94,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.portal.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors link-underline"
-                  >
+                  <a href={link.href} className="text-muted-foreground hover:text-primary transition-colors link-underline">
                     {link.label}
                   </a>
                 </li>
@@ -157,7 +147,6 @@ const Footer = () => {
         {/* Credentials */}
         <div className="border-t border-border/50 pt-10 mb-10">
           <div className="flex flex-wrap items-center justify-center gap-8">
-            {/* e-MEC Badge */}
             <div className="flex items-center gap-4 px-6 py-4 rounded-xl bg-secondary/50 border border-border/50 hover:border-primary/30 transition-all duration-300">
               <div className="w-16 h-16 bg-foreground/10 rounded-lg flex items-center justify-center">
                 <span className="font-display font-bold text-foreground text-xs text-center">e-MEC<br/>✓</span>
@@ -168,7 +157,6 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Reclame Aqui Badge */}
             <div className="flex items-center gap-4 px-6 py-4 rounded-xl bg-secondary/50 border border-border/50 hover:border-primary/30 transition-all duration-300">
               <div className="w-16 h-16 bg-primary/20 rounded-lg flex items-center justify-center">
                 <span className="font-display font-bold text-primary text-2xl">RA</span>

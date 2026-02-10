@@ -36,17 +36,13 @@ const Header = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <a href="#home" className="flex items-center gap-2">
-            <div className={cn(
-              "w-10 h-10 rounded-lg bg-primary flex items-center justify-center transition-all duration-300",
-              isScrolled && "glow-neon-soft"
-            )}>
-              <span className="text-primary-foreground font-display font-bold text-xl">i9</span>
-            </div>
-            <span className="font-display font-bold text-xl text-foreground hidden sm:block">
-              Educação
-            </span>
+          {/* Logo - Image placeholder */}
+          <a href="#home" className="flex items-center">
+            <img
+              src="/placeholder.svg"
+              alt="i9 Educação"
+              className="!max-h-12 w-auto object-contain"
+            />
           </a>
 
           {/* Desktop Navigation */}
