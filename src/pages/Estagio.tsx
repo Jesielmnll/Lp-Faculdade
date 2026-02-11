@@ -90,12 +90,14 @@ const Estagio = () => {
                           <Phone className="w-4 h-4 text-primary" />
                           <span>{item.contato}</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Mail className="w-4 h-4 text-primary" />
-                          <a href={`mailto:${item.email}`} className="hover:text-primary transition-colors link-underline">
-                            {item.email}
-                          </a>
-                        </div>
+                        {item.contato && item.contato.includes('@') && (
+                          <div className="flex items-center gap-2">
+                            <Mail className="w-4 h-4 text-primary" />
+                            <a href={`mailto:${item.contato}`} className="hover:text-primary transition-colors link-underline">
+                              {item.contato}
+                            </a>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}

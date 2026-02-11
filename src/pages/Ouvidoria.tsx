@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,10 +7,11 @@ import { Label } from '@/components/ui/label';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useSubmitOuvidoria } from '@/hooks/useWordPress';
-import { RECAPTCHA_SITE_KEY } from '@/config/api';
+import { RECAPTCHA_SITE_KEY, WP_API_KEY } from '@/config/api';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { cn } from '@/lib/utils';
 import { z } from 'zod';
+
 
 const ouvidoriaSchema = z.object({
   nome: z.string().trim().min(2, 'Nome deve ter pelo menos 2 caracteres').max(100, 'Nome muito longo'),
@@ -26,6 +27,11 @@ const Ouvidoria = () => {
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   const [submitted, setSubmitted] = useState(false);
   const mutation = useSubmitOuvidoria();
+
+  useEffect(() => {
+    console.log('[Ouvidoria] Montado — VITE_WP_API_KEY:', WP_API_KEY ? '✅ definida' : '❌ vazia');
+    console.log('[Ouvidoria] Montado — VITE_RECAPTCHA_SITE_KEY:', RECAPTCHA_SITE_KEY ? '✅ definida' : '❌ vazia');
+  }, []);
 
   const handleChange = useCallback((field: keyof FormData, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -60,9 +66,12 @@ const Ouvidoria = () => {
           });
         });
       }
-    } catch {
-      // Continue without reCAPTCHA in dev
+    } catch (err) {
+      console.warn('[Ouvidoria] reCAPTCHA falhou:', err);
     }
+
+    console.log('[Ouvidoria] Token reCAPTCHA gerado:', recaptchaToken ? recaptchaToken.substring(0, 20) + '...' : '(vazio)');
+    console.log('[Ouvidoria] Payload:', { nome: result.data.nome, email: result.data.email, mensagem: '***', recaptcha_token: !!recaptchaToken });
 
     mutation.mutate(
       {
