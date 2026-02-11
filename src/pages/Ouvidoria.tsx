@@ -73,6 +73,8 @@ const Ouvidoria = () => {
     console.log('[Ouvidoria] Token reCAPTCHA gerado:', recaptchaToken ? recaptchaToken.substring(0, 20) + '...' : '(vazio)');
     console.log('[Ouvidoria] Payload:', { nome: result.data.nome, email: result.data.email, mensagem: '***', recaptcha_token: !!recaptchaToken });
 
+    window.alert('Enviando...');
+
     mutation.mutate(
       {
         nome: result.data.nome,
@@ -81,9 +83,13 @@ const Ouvidoria = () => {
         recaptcha_token: recaptchaToken,
       },
       {
-        onSuccess: () => {
+        onSuccess: (data) => {
+          window.alert('Resposta do Servidor: ' + JSON.stringify(data));
           setSubmitted(true);
           setForm({ nome: '', email: '', mensagem: '' });
+        },
+        onError: (err) => {
+          window.alert('Erro do Servidor: ' + (err instanceof Error ? err.message : JSON.stringify(err)));
         },
       }
     );
