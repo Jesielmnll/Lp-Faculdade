@@ -121,8 +121,23 @@ export async function fetchEstagios(): Promise<EstagioItem[]> {
 }
 
 export async function submitOuvidoria(payload: OuvidoriaPayload): Promise<ApiResponse<unknown>> {
-  return apiFetch<ApiResponse<unknown>>(`${I9_API}/ouvidoria`, {
-    method: 'POST',
-    body: JSON.stringify(payload),
-  });
+  try {
+    const res = await fetch(`${I9_API}/ouvidoria`, {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      console.error('[submitOuvidoria] Erro do servidor:', { status: res.status, body: data });
+      throw new Error(data?.message || `Erro ${res.status}: ${res.statusText}`);
+    }
+
+    return data as ApiResponse<unknown>;
+  } catch (err) {
+    console.error('[submitOuvidoria] Exceção completa:', err);
+    throw err;
+  }
 }
