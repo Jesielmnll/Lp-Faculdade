@@ -1,6 +1,6 @@
 // WordPress API Configuration
 // Reads from environment variables with fallbacks
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://admin.faculdade.i9educacao.edu.br/wp-json';
+export const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'https://admin.faculdade.i9educacao.edu.br/wp-json').replace(/\/+$/, '');
 export const WP_API = `${API_BASE_URL}/wp/v2`;
 export const I9_API = `${API_BASE_URL}/i9/v1`;
 

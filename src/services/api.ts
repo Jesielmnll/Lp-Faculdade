@@ -43,7 +43,6 @@ export interface EstagioItem {
   estado_uf: string;
   nome_orgao: string;
   contato: string;
-  email: string;
 }
 
 export interface OuvidoriaPayload {
