@@ -121,17 +121,17 @@ export async function fetchEstagios(): Promise<EstagioItem[]> {
 }
 
 /**
- * Envia dados da Ouvidoria.
- * Em produção com Node.js/Serverless, aponte VITE_OUVIDORIA_API para /api/ouvidoria.
- * Fallback: envia direto para o WordPress /i9/v1/ouvidoria.
+ * Envia dados da Ouvidoria para o backend interno (/api/ouvidoria).
+ * O backend valida reCAPTCHA e processa o envio de e-mail.
+ * Configure VITE_OUVIDORIA_API no .env (ex: https://seudominio.com/api/ouvidoria).
  */
-const OUVIDORIA_ENDPOINT = import.meta.env.VITE_OUVIDORIA_API || `${I9_API}/ouvidoria`;
+const OUVIDORIA_ENDPOINT = import.meta.env.VITE_OUVIDORIA_API || '/api/ouvidoria';
 
 export async function submitOuvidoria(payload: OuvidoriaPayload): Promise<ApiResponse<unknown>> {
   try {
     const res = await fetch(OUVIDORIA_ENDPOINT, {
       method: 'POST',
-      headers: getHeaders(),
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
 
