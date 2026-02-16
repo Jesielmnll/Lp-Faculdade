@@ -1,25 +1,51 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { MapPin, Phone, Mail, Building } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import BrazilMap from '@/components/BrazilMap';
-import { useEstagios } from '@/hooks/useWordPress';
-import SkeletonCard from '@/components/SkeletonCard';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { cn } from '@/lib/utils';
 import type { EstagioItem } from '@/services/api';
 
+// ── Dados estáticos dos órgãos conveniados ─────────────
+const ORGAOS_CONVENIADOS: EstagioItem[] = [
+  { estado_uf: 'CE', nome_orgao: 'Tribunal de Justiça do Ceará', contato: 'estagiotjce@tjce.jus.br' },
+  { estado_uf: 'CE', nome_orgao: 'Ministério Público do Ceará', contato: '(85) 3452-3800' },
+  { estado_uf: 'CE', nome_orgao: 'Defensoria Pública do Ceará', contato: 'estagio@defensoria.ce.gov.br' },
+  { estado_uf: 'MT', nome_orgao: 'Tribunal de Justiça do Mato Grosso', contato: 'estagio@tjmt.jus.br' },
+  { estado_uf: 'MT', nome_orgao: 'Ministério Público do Mato Grosso', contato: '(65) 3611-0000' },
+  { estado_uf: 'SP', nome_orgao: 'Tribunal Regional do Trabalho - 2ª Região', contato: 'estagio@trt2.jus.br' },
+  { estado_uf: 'RJ', nome_orgao: 'Tribunal de Justiça do Rio de Janeiro', contato: 'estagio@tjrj.jus.br' },
+  { estado_uf: 'MG', nome_orgao: 'Tribunal de Justiça de Minas Gerais', contato: 'estagio@tjmg.jus.br' },
+  { estado_uf: 'BA', nome_orgao: 'Ministério Público da Bahia', contato: 'estagio@mpba.mp.br' },
+  { estado_uf: 'PA', nome_orgao: 'Tribunal de Justiça do Pará', contato: 'estagio@tjpa.jus.br' },
+  { estado_uf: 'MA', nome_orgao: 'Defensoria Pública do Maranhão', contato: 'estagio@defensoria.ma.gov.br' },
+  { estado_uf: 'GO', nome_orgao: 'Tribunal de Justiça de Goiás', contato: 'estagio@tjgo.jus.br' },
+  { estado_uf: 'PE', nome_orgao: 'Tribunal de Justiça de Pernambuco', contato: 'estagio@tjpe.jus.br' },
+  { estado_uf: 'DF', nome_orgao: 'Tribunal de Justiça do Distrito Federal', contato: 'estagio@tjdft.jus.br' },
+];
+
 const Estagio = () => {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
   const [selectedUF, setSelectedUF] = useState<string | null>(null);
-  const { data: estagios, isLoading } = useEstagios();
 
-  const filtered: EstagioItem[] = selectedUF
-    ? (estagios || []).filter((e) => e.estado_uf?.toUpperCase() === selectedUF.toUpperCase())
-    : [];
+  const filtered = useMemo(
+    () => selectedUF ? ORGAOS_CONVENIADOS.filter((e) => e.estado_uf === selectedUF.toUpperCase()) : [],
+    [selectedUF]
+  );
+
+  const availableUFs = useMemo(
+    () => [...new Set(ORGAOS_CONVENIADOS.map((e) => e.estado_uf))],
+    []
+  );
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Estágio i9 — Órgãos Conveniados</title>
+        <meta name="description" content="Encontre órgãos conveniados para estágio em todo o Brasil. Selecione seu estado e veja as oportunidades disponíveis." />
+      </Helmet>
       <Header />
       <main className="pt-28 pb-20">
         <div
@@ -44,7 +70,7 @@ const Estagio = () => {
               <BrazilMap
                 selectedUF={selectedUF}
                 onSelectUF={(uf) => setSelectedUF(uf === selectedUF ? null : uf)}
-                availableUFs={(estagios || []).filter((e) => e.estado_uf).map((e) => e.estado_uf.toUpperCase())}
+                availableUFs={availableUFs}
               />
             </div>
 
@@ -57,15 +83,7 @@ const Estagio = () => {
                 </div>
               )}
 
-              {selectedUF && isLoading && (
-                <div className="space-y-4">
-                  {Array.from({ length: 3 }).map((_, i) => (
-                    <SkeletonCard key={i} variant="simple" />
-                  ))}
-                </div>
-              )}
-
-              {selectedUF && !isLoading && filtered.length === 0 && (
+              {selectedUF && filtered.length === 0 && (
                 <div className="text-center py-16 bg-gradient-card rounded-2xl border border-border/50">
                   <p className="text-muted-foreground">Nenhum órgão conveniado encontrado para <strong className="text-foreground">{selectedUF}</strong>.</p>
                 </div>

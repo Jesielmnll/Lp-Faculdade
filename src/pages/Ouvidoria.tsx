@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -97,6 +98,10 @@ const Ouvidoria = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Ouvidoria — Faculdade i9 Educação</title>
+        <meta name="description" content="Canal de Ouvidoria da Faculdade i9 Educação. Envie sua mensagem, sugestão ou reclamação." />
+      </Helmet>
       <Header />
       <main className="pt-28 pb-20">
         <div

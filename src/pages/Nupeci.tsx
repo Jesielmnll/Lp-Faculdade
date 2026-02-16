@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { AlertTriangle } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -9,6 +10,10 @@ const Nupeci = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>NUPECI — Faculdade i9 Educação</title>
+        <meta name="description" content="Núcleo de Pesquisa Científica e Inovação da Faculdade i9 Educação. Programas de pesquisa e extensão." />
+      </Helmet>
       <Header />
       <main className="pt-28 pb-20">
         <div
