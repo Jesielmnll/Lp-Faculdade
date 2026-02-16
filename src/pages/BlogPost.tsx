@@ -1,9 +1,15 @@
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, Calendar, User } from 'lucide-react';
 import { usePost } from '@/hooks/useWordPress';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import type { WPPost } from '@/services/api';
+
+function stripHtml(html: string): string {
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  return doc.body.textContent || '';
+}
 
 function getFeaturedImage(post: WPPost): string {
   return post.featured_image_url || post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '';
@@ -27,6 +33,16 @@ const BlogPost = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {post && (
+        <Helmet>
+          <title>{stripHtml(post.title.rendered)} — Blog i9</title>
+          <meta name="description" content={stripHtml(post.excerpt.rendered).substring(0, 155)} />
+          <meta property="og:title" content={stripHtml(post.title.rendered)} />
+          <meta property="og:description" content={stripHtml(post.excerpt.rendered).substring(0, 155)} />
+          {getFeaturedImage(post) && <meta property="og:image" content={getFeaturedImage(post)} />}
+          <meta property="og:type" content="article" />
+        </Helmet>
+      )}
       <Header />
       <main className="pt-28 pb-20">
         <div className="container mx-auto px-4">

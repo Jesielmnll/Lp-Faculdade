@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -32,6 +33,10 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Blog — Faculdade i9 Educação</title>
+        <meta name="description" content="Artigos, insights e novidades sobre educação, gestão e carreira no blog da Faculdade i9." />
+      </Helmet>
       <Header />
       <main className="pt-28 pb-20">
         <div className="container mx-auto px-4">

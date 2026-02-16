@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
@@ -8,6 +9,10 @@ const Institucional = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Institucional — Faculdade i9 Educação</title>
+        <meta name="description" content="Conheça a missão, visão e valores da Faculdade i9 Educação. Educação acessível, inovadora e de excelência." />
+      </Helmet>
       <Header />
       <main className="pt-28 pb-20">
         <div
