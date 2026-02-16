@@ -120,9 +120,16 @@ export async function fetchEstagios(): Promise<EstagioItem[]> {
   return apiFetch<EstagioItem[]>(`${I9_API}/estagios`);
 }
 
+/**
+ * Envia dados da Ouvidoria.
+ * Em produção com Node.js/Serverless, aponte VITE_OUVIDORIA_API para /api/ouvidoria.
+ * Fallback: envia direto para o WordPress /i9/v1/ouvidoria.
+ */
+const OUVIDORIA_ENDPOINT = import.meta.env.VITE_OUVIDORIA_API || `${I9_API}/ouvidoria`;
+
 export async function submitOuvidoria(payload: OuvidoriaPayload): Promise<ApiResponse<unknown>> {
   try {
-    const res = await fetch(`${I9_API}/ouvidoria`, {
+    const res = await fetch(OUVIDORIA_ENDPOINT, {
       method: 'POST',
       headers: getHeaders(),
       body: JSON.stringify(payload),
