@@ -8,6 +8,7 @@ import SocialProofSection from '@/components/SocialProofSection';
 import CtaFinalSection from '@/components/CtaFinalSection';
 import Footer from '@/components/Footer';
 
+/* Página principal — Home institucional da Faculdade i9 Educação */
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
