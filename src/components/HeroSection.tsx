@@ -1,6 +1,7 @@
 import { ArrowRight, Sparkles, GraduationCap, BookOpen, Layers, PlayCircle, Scale, Film } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useTypewriter } from '@/hooks/useTypewriter';
 import { cn } from '@/lib/utils';
 import heroBg from '@/assets/hero-bg.jpg';
 
@@ -14,8 +15,21 @@ const categorias = [
   { icon: Scale, label: 'Preparatório OAB', desc: 'Aprovação garantida' },
 ];
 
+const palavrasRotativas = [
+  'o ensino superior.',
+  'o seu futuro.',
+  'novas oportunidades.',
+  'a transformação social.',
+];
+
 const HeroSection = () => {
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>();
+  const textoDigitado = useTypewriter({
+    words: palavrasRotativas,
+    typeSpeed: 80,
+    deleteSpeed: 50,
+    pauseDuration: 2000,
+  });
 
   return (
     <section
@@ -49,11 +63,13 @@ const HeroSection = () => {
           <span className="text-sm font-medium text-foreground/80">Educação como ferramenta de vida</span>
         </div>
 
-        {/* Headline principal */}
-        <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6 max-w-5xl mx-auto">
+        {/* Headline principal com Typewriter */}
+        <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6 max-w-5xl mx-auto min-h-[4.5rem] md:min-h-[7rem] lg:min-h-[9rem]">
           Faculdade i9 Educação:{' '}
-          <span className="text-gradient-neon glow-text-neon">Democratizando o ensino superior.</span>{' '}
-          Transformando vidas.
+          <span className="text-gradient-neon glow-text-neon">
+            Democratizando {textoDigitado}
+            <span className="inline-block w-[3px] h-[0.85em] bg-primary align-middle ml-0.5 animate-[blink_1s_step-end_infinite]" />
+          </span>
         </h1>
 
         {/* Subheadline humanizada */}
